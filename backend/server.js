@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const path = require('path'); // Added for serving static files
 const connectDB = require('./config/db');
 const aiRoutes = require('./routes/aiRoutes');
 
@@ -8,6 +9,9 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Serve static files (HTML, CSS, JS) from the root directory
+app.use(express.static(path.join(__dirname, '..')));
 
 connectDB();
 
@@ -21,8 +25,9 @@ app.get('/api/analytics/visitor-count', (req, res) => {
 // FIXED: '/api/ai' ko change karke '/api' kar diya taaki script.js se match ho jaye
 app.use('/api', aiRoutes);
 
+// Serves the main UI (index.html) on root URL
 app.get('/', (req, res) => {
-    res.send("🚀 Khan Code Academy Backend Server Connected & Operational!");
+    res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
