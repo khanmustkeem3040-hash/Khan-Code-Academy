@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Khan Code Academy</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+    <!-- 1. FORM SECTION (Initial Application Form) -->
+    <div class="main-card" id="form-card">
+        <div class="logo-container">
+            <img src="https://as2.ftcdn.net/v2/jpg/06/04/14/49/1000_F_604144972_qMhgNH5cDis5OxHwUReBTPPf1WcapdJs.jpg" alt="Tiger Logo" class="tiger-logo">
+        </div>
+
+        <h1>Welcome to the Khan Code Academy</h1>
+        <p class="subtitle">Thank you for taking the time to join us. Please answer the following questions to get started.</p>
+        
+        <form id="user-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" placeholder="Enter your age">
+            </div>
+
+            <div class="form-group">
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <label for="male"><input type="radio" id="male" name="gender" value="male"> Male</label>
+                    <label for="female"><input type="radio" id="female" name="gender" value="female"> Female</label>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <h2>Programming Languages List</h2>
+                <ul class="custom-list">
+                    <li>C</li>
+                    <li>C++</li>
+                    <li>Java</li>
+                    <li>Python</li>
+                </ul>
+                <label for="lang-select">Select Primary Language:</label>
+                <select id="lang-select" class="custom-select">
+                    <option>C</option>
+                    <option>C++</option>
+                    <option>Java</option>
+                    <option>Python</option>
+                </select>
+            </div>
+
+            <div class="section-box">
+                <h2>Web Frameworks List</h2>
+                <ul class="custom-list">
+                    <li>React</li>
+                    <li>Vue</li>
+                    <li>Angular</li>
+                    <li>Express</li>
+                    <li>Node.js</li>
+                </ul>
+                <label for="framework-select">Select Primary Framework:</label>
+                <select id="framework-select" class="custom-select">
+                    <option>HTML / CSS / JS</option>
+                    <option>Node.js</option>
+                    <option>Express</option>
+                    <option>React</option>
+                    <option>Angular</option>
+                    <option>Vue</option>
+                </select>
+            </div>
+
+            <div class="section-box">
+                <h2>Tell Us About Yourself</h2>
+                <textarea id="bio" name="bio" rows="4" placeholder="Tell us about your experience and goals..."></textarea>
+            </div>
+
+            <button type="submit" class="glow-btn">Submit Application</button>
+        </form>
+    </div>
+
+    <!-- 2. FULL SCREEN AMAZON-STYLE PORTAL (Submit Hone Ke Baad) -->
+    <div id="learning-dashboard" class="dashboard-hidden">
+        
+        <!-- Top Navbar (Amazon Style) -->
+        <header class="portal-header">
+            <div class="header-left">
+                <img src="https://as2.ftcdn.net/v2/jpg/06/04/14/49/1000_F_604144972_qMhgNH5cDis5OxHwUReBTPPf1WcapdJs.jpg" alt="Tiger Logo" class="nav-logo">
+                <span class="brand-title">Khan Code Academy</span>
+            </div>
+            
+            <div class="search-bar">
+                <select class="search-select">
+                    <option>All Topics</option>
+                    <option>Languages</option>
+                    <option>Frameworks</option>
+                </select>
+                <input type="text" placeholder="Search courses, notes, quizes...">
+                <button class="search-btn">🔍</button>
+            </div>
+
+            <div class="header-right">
+                <div class="user-greeting">
+                    <span class="small-text">Hello,</span>
+                    <span class="user-name-text" id="user-display-name">Mustkeem Khan</span>
+                </div>
+                <div class="nav-item">📚 My Courses</div>
+            </div>
+        </header>
+
+        <!-- Sub Navigation Bar -->
+        <nav class="sub-nav">
+            <a href="#">🔥 All Courses</a>
+            <a href="#">⚡ C++ & Python</a>
+            <a href="#">🌐 Full Stack Development</a>
+            <a href="#">🧠 AI & Machine Learning</a>
+            <a href="#">📝 Cheat Sheets</a>
+        </nav>
+
+        <!-- Amazon Style Hero Banner -->
+        <div class="hero-banner">
+            <div class="hero-content">
+                <h1 id="welcome-msg">Welcome to Khan Code Academy, Mustkeem Khan! 🎉</h1>
+                <p>Start your learning journey today. Select a module below to start practicing!</p>
+            </div>
+            <img src="https://as2.ftcdn.net/v2/jpg/06/04/14/49/1000_F_604144972_qMhgNH5cDis5OxHwUReBTPPf1WcapdJs.jpg" alt="Tiger Banner Logo" class="hero-tiger-img">
+        </div>
+
+        <!-- Portal Grid Content (Amazon Style Cards) -->
+        <main class="portal-main">
+            <h2>Select Learning Category</h2>
+            
+            <div class="portal-grid">
+                <!-- Card 1 -->
+                <div class="amazon-card" onclick="selectMode('notes')">
+                    <h3>📚 Quick Notes</h3>
+                    <div class="card-img-placeholder">
+                        <p>Get concise revision notes for C++, Python & JS before interviews.</p>
+                    </div>
+                    <span class="card-link">Explore Notes &rarr;</span>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="amazon-card" onclick="selectMode('basics')">
+                    <h3>🧠 Basic Concepts</h3>
+                    <div class="card-img-placeholder">
+                        <p>Master Data Structures, OOPs, and Web Development Fundamentals.</p>
+                    </div>
+                    <span class="card-link">Start Basics &rarr;</span>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="amazon-card" onclick="selectMode('quiz')">
+                    <h3>❓ Quiz Challenge</h3>
+                    <div class="card-img-placeholder">
+                        <p>Test your knowledge with live coding quizzes and earn badges.</p>
+                    </div>
+                    <span class="card-link">Take Quiz &rarr;</span>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="amazon-card" onclick="selectMode('coding')">
+                    <h3>💻 Practice Code</h3>
+                    <div class="card-img-placeholder">
+                        <p>Solve coding problems directly in Node.js, Express & React.</p>
+                    </div>
+                    <span class="card-link">Open Workspace &rarr;</span>
+                </div>
+            </div>
+
+            <!-- Dynamic Header with Language Selection Dropdown -->
+            <div class="notes-header-flex">
+                <h3>📚 AI Dynamic Notes (Powered by Gemini API)</h3>
+                
+                <div class="lang-select-box">
+                    <label for="userLangSelect">🌐 Language:</label>
+                    <select id="userLangSelect" class="custom-lang-dropdown">
+                        <option value="English" selected>English</option>
+                        <option value="Hinglish">Hinglish</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Urdu">Urdu</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Dynamic Content Output Box -->
+            <div id="content-box" class="dynamic-portal-box hidden">
+                <h3 id="content-title">Selected Module</h3>
+                <div id="dynamic-content-area"></div>
+                <button class="back-btn" onclick="resetDashboard()">🔄 Clear View</button>
+            </div>
+        </main>
+
+        <!-- Back To Top Bar -->
+        <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">
+            Back to top
+        </div>
+
+        <!-- Amazon Style Footer Section -->
+        <footer class="kca-footer">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>Get to Know Us</h3>
+                    <ul>
+                        <li><a href="#">About Khan Code Academy</a></li>
+                        <li><a href="#">Our Vision</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Community Guidelines</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Connect with Us</h3>
+                    <ul>
+                        <li><a href="https://github.com" target="_blank">GitHub</a></li>
+                        <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+                        <li><a href="https://twitter.com" target="_blank">Twitter / X</a></li>
+                        <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Explore Courses</h3>
+                    <ul>
+                        <li><a href="#">Web Development (HTML/CSS/JS)</a></li>
+                        <li><a href="#">Backend & APIs (Node/Express)</a></li>
+                        <li><a href="#">Database Management (MongoDB/SQL)</a></li>
+                        <li><a href="#">Programming & DSA (C++/Python)</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Need Assistance?</h3>
+                    <ul>
+                        <li><a href="#">Your Profile</a></li>
+                        <li><a href="#">Quiz Performance</a></li>
+                        <li><a href="#">Code Compiler Help</a></li>
+                        <li><a href="#">Contact Lead Instructor</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright Bar -->
+            <div class="footer-bottom-strip">
+                <div class="brand-logo">🚀 Khan Code Academy</div>
+                <div class="footer-copyright">
+                    © 2026 Khan Code Academy, Inc. Built with ❤️ by Mustkeem Khan. All rights reserved.
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>
