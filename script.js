@@ -245,3 +245,17 @@ async function runAICode() {
 function resetDashboard() {
     document.getElementById('content-box').classList.add('hidden');
 }
+
+// 👁️ Show/Hide Password Feature
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('password');
+    const toggleIcon = document.getElementById('togglePassword');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleIcon.innerText = '🙈';
+    } else {
+        passwordInput.type = 'password';
+        toggleIcon.innerText = '👁️';
+    }
+}
