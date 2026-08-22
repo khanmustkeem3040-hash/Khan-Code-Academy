@@ -112,7 +112,7 @@ async function fetchAINotes(language) {
     responseBox.innerHTML = `<h3 style="color: #007185;">⏳ AI is generating complete ${language} syllabus in ${selectedLang}... Please wait!</h3>`;
 
     try {
-        const response = await fetch('http://localhost:5000/api/generate-notes', {
+        const response = await fetch('/api/generate-notes', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -139,7 +139,7 @@ async function fetchAINotes(language) {
     }
 }
 
-// 2. Fetch Basics / DSA (FIXED: Added userLang parameter to payload)
+// 2. Fetch Basics / DSA
 async function fetchAIBasics(category, topic) {
     const box = document.getElementById('ai-basics-box');
     const displayTopic = topic || category;
@@ -148,7 +148,7 @@ async function fetchAIBasics(category, topic) {
     box.innerHTML = `⏳ Fetching AI explanation for ${category}: ${displayTopic} in ${selectedLang}...`;
 
     try {
-        const response = await fetch('http://localhost:5000/api/generate-basics', {
+        const response = await fetch('/api/generate-basics', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -173,7 +173,7 @@ async function fetchAIBasics(category, topic) {
     }
 }
 
-// 3. Fetch Quiz (FIXED: Added userLang parameter)
+// 3. Fetch Quiz
 async function fetchAIQuiz(language) {
     const box = document.getElementById('ai-quiz-box');
     const selectedLang = getSelectedUserLanguage();
@@ -181,7 +181,7 @@ async function fetchAIQuiz(language) {
     box.innerHTML = `⏳ AI is creating a dynamic ${language} quiz in ${selectedLang}...`;
 
     try {
-        const response = await fetch('http://localhost:5000/api/generate-quiz', {
+        const response = await fetch('/api/generate-quiz', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
@@ -225,7 +225,7 @@ async function runAICode() {
     outputBox.innerHTML = "⏳ AI Engine is compiling and analyzing code...";
 
     try {
-        const response = await fetch('http://localhost:5000/api/run-code', {
+        const response = await fetch('/api/run-code', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ language: "JavaScript/General", code: code })
