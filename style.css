@@ -50,7 +50,7 @@ body.dashboard-active {
 .tiger-logo {
     width: 300px;
     height: 150px;
-    filter: drop-shadow(0 0 10px #38bdf8); /* Logo glow */
+    filter: drop-shadow(0 0 10px #38bdf8);
     transition: transform 0.3s ease;
     border-radius: 12px;
 }
@@ -178,7 +178,7 @@ textarea {
 }
 
 /* =================================================== */
-/* 🛒 AMAZON-STYLE PORTAL CSS (FORM SUBMIT KE BAAD)   */
+/* 🛒 AMAZON-STYLE PORTAL CSS                         */
 /* =================================================== */
 
 .dashboard-hidden {
@@ -410,6 +410,8 @@ textarea {
     padding: 25px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 100% !important;
+    overflow-x: hidden !important;
 }
 
 .dynamic-portal-box h3 {
@@ -543,30 +545,35 @@ textarea {
     color: #999999;
 }
 
-/* 💻 CODE BLOCK STYLING (HAR LANGUAGE KE LIYE MOBILE FIX) */
-pre, code {
-    white-space: pre !important;
-    word-break: normal !important;
-    overflow-x: auto !important;
+/* 💻 PERFECT MOBILE CODE & AI RESPONSE TEXT WRAP FIX */
+#ai-response-box, 
+#content-box,
+#dynamic-content-area {
     max-width: 100% !important;
-    display: block;
+    overflow-x: hidden !important;
 }
 
-pre {
+/* AI dwara generated div, pre, code sabhi elements auto-wrap honge */
+#ai-response-box div,
+#dynamic-content-area div,
+.dynamic-portal-box pre,
+#content-box pre,
+pre, code {
+    white-space: pre-wrap !important; /* Forces long lines to break into next lines */
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    max-width: 100% !important;
     background-color: #1e293b;
     color: #f8fafc;
-    padding: 15px;
+    padding: 12px;
     border-radius: 8px;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.5;
-    margin: 15px 0;
-    border: 1px solid #334155;
+    margin: 10px 0;
 }
 
-/* =================================================== */
-/* 📱 ULTIMATE MOBILE RESPONSIVE FIX (BOTTOM OVERRIDE) */
-/* =================================================== */
+/* 📱 ULTIMATE MOBILE RESPONSIVE FIX */
 @media screen and (max-width: 768px) {
     html, body {
         width: 100% !important;
@@ -574,7 +581,6 @@ pre {
         overflow-x: hidden !important;
     }
 
-    /* Portal Header & Search Bar */
     .portal-header {
         flex-direction: column !important;
         padding: 12px 10px !important;
@@ -591,7 +597,6 @@ pre {
         max-width: 100% !important;
     }
 
-    /* Sub Nav horizontal scroll on mobile */
     .sub-nav {
         overflow-x: auto !important;
         white-space: nowrap !important;
@@ -599,7 +604,6 @@ pre {
         gap: 15px !important;
     }
 
-    /* Hero Banner padding fix */
     .hero-banner {
         flex-direction: column !important;
         padding: 20px 15px !important;
@@ -612,7 +616,6 @@ pre {
         font-size: 22px !important;
     }
 
-    /* Grid Layouts & Cards */
     .portal-main {
         padding: 0 10px !important;
         margin: 15px auto !important;
@@ -622,7 +625,6 @@ pre {
         grid-template-columns: 1fr !important;
     }
 
-    /* Initial Main Form Card */
     .main-card {
         padding: 20px 15px !important;
     }
@@ -632,29 +634,4 @@ pre {
         height: auto !important;
         max-width: 250px !important;
     }
-
-    pre {
-        font-size: 12px !important;
-        padding: 12px !important;
-    }
-}
-
-/* Dynamic Portal Box ke andar wale Code Blocks */
-.dynamic-portal-box pre,
-#content-box pre {
-    background-color: #1e293b !important;
-    color: #f8fafc !important;
-    padding: 15px !important;
-    border-radius: 8px !important;
-    overflow-x: auto !important;
-    white-space: pre !important;
-    word-wrap: normal !important;
-    display: block !important;
-    border: 1px solid #334155 !important;
-}
-
-.dynamic-portal-box code,
-#content-box code {
-    white-space: pre !important;
-    font-family: 'Courier New', Courier, monospace !important;
 }
