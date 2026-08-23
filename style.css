@@ -543,6 +543,26 @@ textarea {
     color: #999999;
 }
 
+/* 💻 CODE BLOCK STYLING (HAR LANGUAGE KE LIYE MOBILE FIX) */
+pre, code {
+    white-space: pre !important;
+    word-break: normal !important;
+    overflow-x: auto !important;
+    max-width: 100% !important;
+    display: block;
+}
+
+pre {
+    background-color: #1e293b;
+    color: #f8fafc;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 15px 0;
+    border: 1px solid #334155;
+}
 
 /* =================================================== */
 /* 📱 ULTIMATE MOBILE RESPONSIVE FIX (BOTTOM OVERRIDE) */
@@ -611,5 +631,10 @@ textarea {
         width: 100% !important;
         height: auto !important;
         max-width: 250px !important;
+    }
+
+    pre {
+        font-size: 12px !important;
+        padding: 12px !important;
     }
 }
