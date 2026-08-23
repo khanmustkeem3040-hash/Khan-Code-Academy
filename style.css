@@ -431,7 +431,18 @@ textarea {
     margin-bottom: 15px;
 }
 
-/* AI dwara Injected Pre and Code Blocks Strict Custom Styling */
+/* AI dwara Injected Elements Complete Strict Text Wrapping Fix */
+#ai-response-box *, 
+#ai-basics-box *,
+#dynamic-content-area * {
+    max-width: 100% !important;
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+    overflow-wrap: anywhere !important;
+    box-sizing: border-box !important;
+}
+
+/* AI Code Blocks Styling */
 pre, code, 
 #dynamic-content-area pre, 
 #content-box pre, 
@@ -439,7 +450,6 @@ pre, code,
 #ai-response-box pre {
     white-space: pre-wrap !important;
     word-break: break-all !important;
-    word-wrap: break-word !important;
     overflow-x: auto !important;
     max-width: 100% !important;
     width: 100% !important;

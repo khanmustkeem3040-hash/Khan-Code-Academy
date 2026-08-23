@@ -51,7 +51,7 @@ function selectMode(mode) {
                     `<button style="background: #131921; color: #febd69; border: 1px solid #febd69; padding: 10px 18px; border-radius: 6px; cursor: pointer; font-weight: bold;" onclick="fetchAINotes('${lang}')">${lang}</button>`
                 ).join('')}
             </div>
-            <div id="ai-response-box" style="background: #ffffff; padding: 25px; border-radius: 8px; border: 1px solid #ddd; color: #111;">
+            <div id="ai-response-box" style="background: #ffffff; padding: 15px; border-radius: 8px; border: 1px solid #ddd; color: #111; max-width: 100%; overflow-x: hidden;">
                 <p style="font-size: 16px; color: #555;">👈 Click any technology above. AI will generate complete end-to-end notes with live code examples!</p>
             </div>`;
 
@@ -59,21 +59,21 @@ function selectMode(mode) {
     } else if (mode === 'basics') {
         contentTitle.innerText = "🧠 AI Basic Concepts & DSA Masterclass";
         contentArea.innerHTML = `
-            <div style="background: #ffffff; padding: 20px; border-radius: 8px; border-left: 5px solid #007185; color: #111;">
+            <div style="background: #ffffff; padding: 20px; border-radius: 8px; border-left: 5px solid #007185; color: #111; max-width: 100%;">
                 <p style="margin-bottom: 15px; font-weight: bold;">Choose a Core Topic to Fetch Detailed AI Explanation:</p>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
                     <button style="background: #007185; color: white; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;" onclick="fetchAIBasics('DSA', 'Data Structures & Algorithms')">DSA Masterclass</button>
                     <button style="background: #007185; color: white; border: none; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-weight: bold;" onclick="fetchAIBasics('OOPs', 'Object-Oriented Programming')">OOPs Concepts</button>
                 </div>
-                <div id="ai-basics-box" style="color: #333; line-height: 1.6; white-space: pre-line;">Select a topic above...</div>
+                <div id="ai-basics-box" style="color: #333; line-height: 1.6; max-width: 100%; overflow-x: hidden;">Select a topic above...</div>
             </div>
         `;
     } else if (mode === 'quiz') {
         contentTitle.innerText = "❓ Live AI Quiz Challenge Generator";
         contentArea.innerHTML = `
-            <div style="background: #fff; padding: 20px; border-radius: 8px; border-left: 5px solid #16a34a; color: #111;">
+            <div style="background: #fff; padding: 20px; border-radius: 8px; border-left: 5px solid #16a34a; color: #111; max-width: 100%;">
                 <p style="font-size: 15px; margin-bottom: 10px; font-weight: bold;">⚡ Select Language for Live AI Quiz:</p>
-                <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
                     <button style="background: #16a34a; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;" onclick="fetchAIQuiz('C++')">C++ Quiz</button>
                     <button style="background: #16a34a; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;" onclick="fetchAIQuiz('Python')">Python Quiz</button>
                     <button style="background: #16a34a; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;" onclick="fetchAIQuiz('JavaScript')">JavaScript Quiz</button>
@@ -84,11 +84,11 @@ function selectMode(mode) {
     } else {
         contentTitle.innerText = "💻 AI Online Code Compiler & Workspace";
         contentArea.innerHTML = `
-            <div style="background: #1e293b; color: white; padding: 20px; border-radius: 8px;">
+            <div style="background: #1e293b; color: white; padding: 20px; border-radius: 8px; max-width: 100%;">
                 <p style="margin-bottom: 10px; color: #38bdf8; font-weight: bold;">AI Powered Code Workspace:</p>
                 <textarea id="code-input" style="width: 100%; height: 120px; background: #0f172a; color: #a7f3d0; padding: 10px; font-family: monospace; border-radius: 6px; border: 1px solid #334155;" placeholder="Write your C++, JS or Python code here..."></textarea>
                 <button style="background: #38bdf8; color: #0f172a; border: none; padding: 8px 20px; margin-top: 10px; border-radius: 6px; font-weight: bold; cursor: pointer;" onclick="runAICode()">Run & Analyze Code</button>
-                <div id="code-output" style="margin-top: 15px; background: #0f172a; padding: 12px; border-radius: 6px; font-family: monospace; color: #e2e8f0; white-space: pre-line;">Output will appear here...</div>
+                <div id="code-output" style="margin-top: 15px; background: #0f172a; padding: 12px; border-radius: 6px; font-family: monospace; color: #e2e8f0; white-space: pre-wrap; word-break: break-all;">Output will appear here...</div>
             </div>
         `;
     }
@@ -100,6 +100,19 @@ function selectMode(mode) {
 function getSelectedUserLanguage() {
     const langSelectElement = document.getElementById('userLangSelect') || document.getElementById('langSelect');
     return langSelectElement ? langSelectElement.value : 'English';
+}
+
+// Auto Wrap Fix Helper Function
+function applyStrictWrap(container) {
+    if (!container) return;
+    const elements = container.querySelectorAll('pre, code, div, p');
+    elements.forEach(el => {
+        el.style.whiteSpace = 'pre-wrap';
+        el.style.wordBreak = 'break-all';
+        el.style.overflowWrap = 'break-word';
+        el.style.maxWidth = '100%';
+        el.style.boxSizing = 'border-box';
+    });
 }
 
 // 🤖 Real AI / API Fetching Functions
@@ -127,10 +140,13 @@ async function fetchAINotes(language) {
             
             responseBox.innerHTML = `
                 <h2 style="color: #131921; border-bottom: 2px solid #febd69; padding-bottom: 8px;">${language} Complete Course (${selectedLang})</h2>
-                <div style="margin-top: 15px; line-height: 1.8; font-size: 15px; text-align: left;">
+                <div id="formatted-notes-content" style="margin-top: 15px; line-height: 1.8; font-size: 15px; text-align: left; max-width: 100%; overflow-x: hidden;">
                     ${formattedHTML}
                 </div>
             `;
+
+            // Force auto-wrap on code blocks
+            applyStrictWrap(document.getElementById('formatted-notes-content'));
         } else {
             responseBox.innerHTML = `<p style="color: red;">⚠️ Error: ${data.error}</p>`;
         }
@@ -161,10 +177,13 @@ async function fetchAIBasics(category, topic) {
 
         if (data.success) {
             const formattedHTML = typeof marked !== 'undefined' ? marked.parse(data.content) : data.content;
-            box.innerHTML = `<div style="background: #f8fafc; padding: 15px; border-radius: 6px; margin-top: 10px;">
+            box.innerHTML = `<div style="background: #f8fafc; padding: 15px; border-radius: 6px; margin-top: 10px; max-width: 100%; overflow-x: hidden;">
                 <h4>📌 AI Masterclass on ${displayTopic} (${selectedLang}):</h4>
-                <div>${formattedHTML}</div>
+                <div id="formatted-basics-content" style="max-width: 100%;">${formattedHTML}</div>
             </div>`;
+
+            // Force auto-wrap on code blocks
+            applyStrictWrap(document.getElementById('formatted-basics-content'));
         } else {
             box.innerHTML = `<p style="color: red;">⚠️ Error generating concept.</p>`;
         }
@@ -195,7 +214,7 @@ async function fetchAIQuiz(language) {
             let quizHTML = '';
             data.questions.forEach((q, idx) => {
                 quizHTML += `
-                    <div style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #ccc; margin-top: 10px;">
+                    <div style="background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #ccc; margin-top: 10px; max-width: 100%;">
                         <p><strong>Q${idx+1}: ${q.question}</strong></p>
                         <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
                             ${q.options.map(opt => `<button style="background: #febd69; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;" onclick="alert('${opt === q.answer ? '✅ Correct! ' + q.explanation : '❌ Wrong Answer! Try Again.'}')">${opt}</button>`).join('')}
