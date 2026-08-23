@@ -635,3 +635,22 @@ pre, code {
         max-width: 250px !important;
     }
 }
+
+/* 🔒 GUARANTEED ALL-ELEMENT MOBILE OVERFLOW & SCROLL FIX */
+html, body, main, div, section, article, p, pre, code {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* AI Dynamically Injected Code Blocks Fix */
+pre, code, .dynamic-portal-box pre, #ai-response-box pre {
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+    overflow-x: auto !important;
+    display: block !important;
+    max-width: 100% !important;
+    font-size: 11px !important;
+    padding: 10px !important;
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+}
