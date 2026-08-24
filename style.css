@@ -646,3 +646,42 @@ pre, code,
         max-width: 250px !important;
     }
 }
+
+
+/* Code Box Block Styling */
+.code-block-wrapper {
+    position: relative;
+    background: #1e293b;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    overflow-x: auto;
+}
+
+.code-block-wrapper pre {
+    margin: 0;
+    padding-top: 25px;
+    background: transparent !important;
+    color: #38bdf8 !important;
+}
+
+/* Copy Button Styling */
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #febd69;
+    color: #111;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 99;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.copy-btn:hover {
+    background: #f3a847;
+}

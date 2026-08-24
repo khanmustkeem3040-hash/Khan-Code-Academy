@@ -116,45 +116,58 @@ function applyStrictWrap(container) {
     });
 }
 
-// 📋 COPY BUTTON FEATURE FOR CODE BLOCKS
+// 📋 Smart Copy Button Feature
 function addCopyButtons(container) {
     if (!container) return;
-    const codeBlocks = container.querySelectorAll('pre');
     
-    codeBlocks.forEach((pre) => {
-        if (pre.querySelector('.copy-btn')) return;
+    // Check for standard pre elements or code sections
+    const codeBlocks = container.querySelectorAll('pre');
 
-        pre.style.position = 'relative';
-        
-        const btn = document.createElement('button');
-        btn.className = 'copy-btn';
-        btn.innerText = '📋 Copy';
-        btn.style.cssText = `
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: #febd69;
-            color: #111;
-            border: none;
-            padding: 4px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: bold;
-            z-index: 10;
-        `;
+    if (codeBlocks.length > 0) {
+        codeBlocks.forEach((pre) => {
+            if (pre.querySelector('.copy-btn')) return;
 
-        btn.onclick = () => {
-            const codeText = pre.querySelector('code') ? pre.querySelector('code').innerText : pre.innerText;
-            const cleanText = codeText.replace('📋 Copy', '').replace('✅ Copied!', '').trim();
-            navigator.clipboard.writeText(cleanText).then(() => {
-                btn.innerText = '✅ Copied!';
-                setTimeout(() => { btn.innerText = '📋 Copy'; }, 2000);
-            });
-        };
+            pre.style.position = 'relative';
+            
+            const btn = document.createElement('button');
+            btn.className = 'copy-btn';
+            btn.innerText = '📋 Copy Code';
 
-        pre.appendChild(btn);
-    });
+            btn.onclick = () => {
+                const codeText = pre.querySelector('code') ? pre.querySelector('code').innerText : pre.innerText;
+                const cleanText = codeText.replace('📋 Copy Code', '').replace('✅ Copied!', '').trim();
+                navigator.clipboard.writeText(cleanText).then(() => {
+                    btn.innerText = '✅ Copied!';
+                    setTimeout(() => { btn.innerText = '📋 Copy Code'; }, 2000);
+                });
+            };
+
+            pre.appendChild(btn);
+        });
+    } else {
+        // Agar AI Markdown pre tags na de sake toh wrapper container create karke button lagayega
+        const allHeadings = container.querySelectorAll('h3, h4, strong');
+        allHeadings.forEach((el) => {
+            if (el.innerText.toLowerCase().includes('code') || el.innerText.toLowerCase().includes('program')) {
+                let nextEl = el.nextElementSibling;
+                if (nextEl && !nextEl.querySelector('.copy-btn')) {
+                    nextEl.style.position = 'relative';
+                    const btn = document.createElement('button');
+                    btn.className = 'copy-btn';
+                    btn.innerText = '📋 Copy Code';
+                    
+                    btn.onclick = () => {
+                        const cleanText = nextEl.innerText.replace('📋 Copy Code', '').replace('✅ Copied!', '').trim();
+                        navigator.clipboard.writeText(cleanText).then(() => {
+                            btn.innerText = '✅ Copied!';
+                            setTimeout(() => { btn.innerText = '📋 Copy Code'; }, 2000);
+                        });
+                    };
+                    nextEl.appendChild(btn);
+                }
+            }
+        });
+    }
 }
 
 // 🤖 Real AI / API Fetching Functions
