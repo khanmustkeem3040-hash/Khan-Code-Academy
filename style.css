@@ -448,6 +448,7 @@ pre, code,
 #content-box pre, 
 .dynamic-portal-box pre,
 #ai-response-box pre {
+    position: relative !important;
     white-space: pre-wrap !important;
     word-break: break-all !important;
     overflow-x: auto !important;
@@ -456,12 +457,12 @@ pre, code,
     display: block !important;
     background-color: #1e293b !important;
     color: #f8fafc !important;
-    padding: 12px !important;
+    padding: 35px 12px 12px 12px !important;
     border-radius: 8px !important;
     font-family: 'Consolas', 'Courier New', Courier, monospace !important;
     font-size: 12px !important;
     line-height: 1.5 !important;
-    margin: 10px 0 !important;
+    margin: 15px 0 !important;
 }
 
 .back-btn {
@@ -647,10 +648,10 @@ pre, code,
     }
 }
 
-
 /* Code Box Block Styling */
-.code-block-wrapper {
-    position: relative;
+.code-block-wrapper,
+.code-wrapper-box {
+    position: relative !important;
     background: #1e293b;
     border-radius: 8px;
     padding: 15px;
@@ -658,7 +659,8 @@ pre, code,
     overflow-x: auto;
 }
 
-.code-block-wrapper pre {
+.code-block-wrapper pre,
+.code-wrapper-box pre {
     margin: 0;
     padding-top: 25px;
     background: transparent !important;
@@ -667,21 +669,27 @@ pre, code,
 
 /* Copy Button Styling */
 .copy-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #febd69;
-    color: #111;
-    border: none;
-    padding: 5px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: bold;
-    z-index: 99;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    position: absolute !important;
+    top: 8px !important;
+    right: 8px !important;
+    background: #febd69 !important;
+    color: #111 !important;
+    border: none !important;
+    padding: 5px 12px !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    z-index: 99 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+    transition: all 0.2s ease !important;
 }
 
 .copy-btn:hover {
-    background: #f3a847;
+    background: #f3a847 !important;
+}
+
+.copy-btn.copied {
+    background: #22c55e !important;
+    color: #ffffff !important;
 }

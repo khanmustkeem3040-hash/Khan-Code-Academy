@@ -50,6 +50,10 @@ You MUST write all explanations, headings, breakdowns, visual intuition, and con
 - If language is "Hinglish", write naturally in Hindi using Roman English script (e.g., "OOPs ek programming paradigm hai jisme hum real-world entities ko objects ke roop me model karte hain...").
 - If language is "Hindi", write strictly in Devanagari script.
 - Keep standard technical terms, variable names, syntax, and code intact.
+
+STRICT CODE BLOCK FORMATTING RULE:
+- ALWAYS wrap EVERY single programming code example strictly inside Markdown triple backticks code block (e.g. \`\`\`cpp or \`\`\`html or \`\`\`javascript).
+- NEVER output raw source code as plain text paragraphs.
 `;
 }
 
@@ -84,7 +88,7 @@ HEADER AT THE TOP:
             prompt += `
 STRICT RULES FOR HTML/CSS/JS:
 1. ALWAYS use backticks for tags in text, like \`<div>\`, \`<span>\`, \`<h1>\`, \`<a>\`, \`<input>\`, \`<table>\`.
-2. Every full code example MUST be wrapped in \`\`\`html or \`\`\`css or \`\`\`javascript code block.
+2. Every full code example MUST be wrapped strictly in \`\`\`html or \`\`\`css or \`\`\`javascript code block.
 
 ${language === 'HTML' ? `
 STRUCTURE FOR HTML:
@@ -138,7 +142,7 @@ STRICT RULES FOR NODE / EXPRESS / REACT:
 1. Provide step-by-step setup (NPM init, package installations, folder structure).
 2. For React: Cover Components, JSX, Props, State (useState), Hooks (useEffect), and Event Handling.
 3. For Node/Express: Cover Server Setup, REST API Routes (GET, POST, PUT, DELETE), Middleware, and Async Handling.
-4. Every code example MUST be complete and wrapped in \`\`\`javascript code block.
+4. Every code example MUST be complete and strictly wrapped in \`\`\`javascript code block.
 `;
         } else if (isDatabase) {
             prompt += `
@@ -146,12 +150,12 @@ STRICT RULES FOR DATABASES (${language}):
 1. Cover Core Concepts: CRUD Operations (Create, Read, Update, Delete).
 2. For MongoDB: Explain Schemas, Models, Mongoose Connection, Aggregation, and Queries.
 3. For SQL/MySQL/PostgreSQL: Explain Tables, Primary/Foreign Keys, Queries (SELECT, INSERT, UPDATE, DELETE), JOINs, and Grouping.
-4. Provide clear executable Query / Code Blocks with sample data examples.
+4. Provide clear executable Query / Code Blocks strictly wrapped in \`\`\`sql or \`\`\`javascript code blocks.
 `;
         } else {
             prompt += `
 STRICT STRUCTURE RULES FOR ${language} (C, C++, Java, Python):
-1. **Hello World Program Section**: Complete code + Expected Output + Line-by-Line Breakdown.
+1. **Hello World Program Section**: Complete code wrapped in \`\`\` code block + Expected Output + Line-by-Line Breakdown.
 2. **Sequential Numbered Topics (1 to 11)**:
    1. Variables & Data Types + Input/Output
    2. Instructions & Operators
@@ -165,7 +169,7 @@ STRICT STRUCTURE RULES FOR ${language} (C, C++, Java, Python):
    10. File I/O
    11. Dynamic Memory Allocation
 
-For EVERY topic: Concept Explanation + Complete Code + **Expected Output** + Line-by-Line Breakdown.
+For EVERY topic: Concept Explanation + Complete Code wrapped in \`\`\` code block + **Expected Output** + Line-by-Line Breakdown.
 `;
         }
 
@@ -215,7 +219,7 @@ COVER ALL TOPICS SEQUENTIALLY FROM ZERO TO HERO:
 
 For EVERY main section, provide:
 - Clear Explanation in ${selectedLanguage}
-- Complete Executable Code Snippet (in C++ or Python)
+- Complete Executable Code Snippet strictly wrapped in \`\`\`cpp or \`\`\`python code block
 - Expected Output
 - Line-by-Line Breakdown in ${selectedLanguage}`;
         } else {
@@ -240,7 +244,7 @@ COVER ALL OOPS TOPICS SEQUENTIALLY WITH FULL CODE EXAMPLES:
 
 For EVERY section, provide:
 - Detailed Concept Explanation in ${selectedLanguage}
-- Complete Executable Code Snippet (C++ or Python)
+- Complete Executable Code Snippet strictly wrapped in \`\`\`cpp or \`\`\`python code block
 - Expected Output
 - Line-by-Line Code Breakdown in ${selectedLanguage}`;
         }
