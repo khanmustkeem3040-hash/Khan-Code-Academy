@@ -431,38 +431,15 @@ textarea {
     margin-bottom: 15px;
 }
 
-/* AI dwara Injected Elements Complete Strict Text Wrapping Fix */
+/* AI dwara Injected Elements Text Formatting */
 #ai-response-box *, 
 #ai-basics-box *,
 #dynamic-content-area * {
     max-width: 100% !important;
     white-space: pre-wrap !important;
-    word-break: break-all !important;
+    word-break: break-word !important;
     overflow-wrap: anywhere !important;
     box-sizing: border-box !important;
-}
-
-/* AI Code Blocks Styling */
-pre, code, 
-#dynamic-content-area pre, 
-#content-box pre, 
-.dynamic-portal-box pre,
-#ai-response-box pre {
-    position: relative !important;
-    white-space: pre-wrap !important;
-    word-break: break-all !important;
-    overflow-x: auto !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    display: block !important;
-    background-color: #1e293b !important;
-    color: #f8fafc !important;
-    padding: 35px 12px 12px 12px !important;
-    border-radius: 8px !important;
-    font-family: 'Consolas', 'Courier New', Courier, monospace !important;
-    font-size: 12px !important;
-    line-height: 1.5 !important;
-    margin: 15px 0 !important;
 }
 
 .back-btn {
@@ -694,34 +671,54 @@ pre, code,
     color: #ffffff !important;
 }
 
-/* 1. Horizontal Lines (Hr tag) ko hide ya subtle karne ke liye */
+/* =================================================== */
+/* 🛠️ NEW UI FIXES (Single Line Code & Border Lines)  */
+/* =================================================== */
+
+/* Horizontal Lines (HR) Remove */
 #ai-response-box hr,
 #dynamic-content-area hr,
 .dynamic-portal-box hr {
-    display: none !important; /* Lines bilkul hatane ke liye */
+    display: none !important;
 }
 
-/* 2. Inline Code (Chhote single-line code blocks) ko normal highlight box banane ke liye */
-#ai-response-box p code,
-#dynamic-content-area p code,
-.dynamic-portal-box p code {
-    background-color: #f1f5f9 !important; /* Soft Light Grey Background */
-    color: #0f172a !important;            /* Dark readable text */
-    padding: 2px 6px !important;
-    border-radius: 4px !important;
-    font-size: 14px !important;
-    display: inline !important;           /* Poori width nahi lega, text ke saath fit hoga */
-    border: 1px solid #cbd5e1 !important;
-    box-shadow: none !important;
+/* Single Inline Code Tags (#include, printf, etc.) - Dynamic Text Fit */
+#ai-response-box code:not(pre code),
+#dynamic-content-area code:not(pre code),
+.dynamic-portal-box code:not(pre code),
+p code, li code {
+    display: inline-block !important;
+    width: auto !important;
+    background-color: #1e293b !important;
+    color: #38bdf8 !important;
+    padding: 3px 8px !important;
+    margin: 2px 4px !important;
+    border-radius: 5px !important;
+    font-size: 13px !important;
+    border: 1px solid #334155 !important;
 }
 
-/* Badhe Code Blocks (Multline C Code) waise hi Dark rahenge */
+/* Multiline Code Blocks (Full C/C++ Code) - Full Width Dark Box */
+#ai-response-box pre,
+#dynamic-content-area pre,
+.dynamic-portal-box pre {
+    display: block !important;
+    width: 100% !important;
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    padding: 35px 15px 15px 15px !important;
+    border-radius: 8px !important;
+    margin: 15px 0 !important;
+    position: relative !important;
+}
+
 #ai-response-box pre code,
 #dynamic-content-area pre code,
 .dynamic-portal-box pre code {
+    display: block !important;
     background: transparent !important;
     color: inherit !important;
-    display: block !important;
     padding: 0 !important;
     border: none !important;
+    width: 100% !important;
 }
