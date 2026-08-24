@@ -1,3 +1,4 @@
+
 let userData = {
     name: "Student",
     selectedLang: "C++",
@@ -115,6 +116,47 @@ function applyStrictWrap(container) {
     });
 }
 
+// 📋 COPY BUTTON FEATURE FOR CODE BLOCKS
+function addCopyButtons(container) {
+    if (!container) return;
+    const codeBlocks = container.querySelectorAll('pre');
+    
+    codeBlocks.forEach((pre) => {
+        if (pre.querySelector('.copy-btn')) return;
+
+        pre.style.position = 'relative';
+        
+        const btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.innerText = '📋 Copy';
+        btn.style.cssText = `
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #febd69;
+            color: #111;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10;
+        `;
+
+        btn.onclick = () => {
+            const codeText = pre.querySelector('code') ? pre.querySelector('code').innerText : pre.innerText;
+            const cleanText = codeText.replace('📋 Copy', '').replace('✅ Copied!', '').trim();
+            navigator.clipboard.writeText(cleanText).then(() => {
+                btn.innerText = '✅ Copied!';
+                setTimeout(() => { btn.innerText = '📋 Copy'; }, 2000);
+            });
+        };
+
+        pre.appendChild(btn);
+    });
+}
+
 // 🤖 Real AI / API Fetching Functions
 
 // 1. Fetch Notes
@@ -145,8 +187,10 @@ async function fetchAINotes(language) {
                 </div>
             `;
 
-            // Force auto-wrap on code blocks
-            applyStrictWrap(document.getElementById('formatted-notes-content'));
+            // Force auto-wrap & Add Copy Buttons
+            const notesContent = document.getElementById('formatted-notes-content');
+            applyStrictWrap(notesContent);
+            addCopyButtons(notesContent);
         } else {
             responseBox.innerHTML = `<p style="color: red;">⚠️ Error: ${data.error}</p>`;
         }
@@ -182,8 +226,10 @@ async function fetchAIBasics(category, topic) {
                 <div id="formatted-basics-content" style="max-width: 100%;">${formattedHTML}</div>
             </div>`;
 
-            // Force auto-wrap on code blocks
-            applyStrictWrap(document.getElementById('formatted-basics-content'));
+            // Force auto-wrap & Add Copy Buttons
+            const basicsContent = document.getElementById('formatted-basics-content');
+            applyStrictWrap(basicsContent);
+            addCopyButtons(basicsContent);
         } else {
             box.innerHTML = `<p style="color: red;">⚠️ Error generating concept.</p>`;
         }
@@ -253,6 +299,7 @@ async function runAICode() {
 
         if (data.success) {
             outputBox.innerText = data.output;
+            addCopyButtons(outputBox);
         } else {
             outputBox.innerText = "⚠️ Execution Error: " + data.error;
         }
