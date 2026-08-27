@@ -4,7 +4,6 @@ const cors = require('cors');
 const path = require('path'); // Added for serving static files
 const connectDB = require('./config/db');
 const aiRoutes = require('./routes/aiRoutes');
-const userRoutes = require('./routes/userRoutes'); // 👈 ADDED LINE 1: User Routes
 
 const app = express();
 
@@ -25,7 +24,6 @@ app.get('/api/analytics/visitor-count', (req, res) => {
 
 // FIXED: '/api/ai' ko change karke '/api' kar diya taaki script.js se match ho jaye
 app.use('/api', aiRoutes);
-app.use('/api/user', userRoutes); // 👈 ADDED LINE 2: User API Link
 
 // Serves the main UI (index.html) on root URL
 app.get('/', (req, res) => {

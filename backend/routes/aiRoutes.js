@@ -2,6 +2,35 @@ const express = require('express');
 const router = express.Router();
 require('dotenv').config();
 const { GoogleGenAI } = require('@google/genai');
+const mongoose = require('mongoose'); // 👈 Mongo DB Added
+
+// 📝 User Schema & Model (Cloud Database Ke Liye)
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  password: String,
+  age: Number,
+  gender: String,
+  bio: String,
+  createdAt: { type: Date, default: Date.now }
+});
+
+const User = mongoose.models.User || mongoose.model('User', userSchema);
+
+// ==========================================
+// 0. ROUTE: USER REGISTRATION (DATABASE SAVE)
+// ==========================================
+router.post('/register', async (req, res) => {
+  try {
+    const newUser = new User(req.body);
+    await newUser.save();
+    console.log("✅ User Saved to MongoDB Atlas:", req.body.name);
+    res.json({ success: true, message: "Registered successfully!" });
+  } catch (err) {
+    console.error("❌ Registration Error:", err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
 
 // Official Google GenAI Client Initialization
 const apiKey = process.env.GEMINI_API_KEY;
