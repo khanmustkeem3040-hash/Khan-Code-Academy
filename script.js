@@ -7,7 +7,7 @@ let userData = {
 // Form Handler
 const form = document.querySelector('form');
 if (form) {
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', async function(event) {
         event.preventDefault();
 
         const name = document.getElementById('name') ? document.getElementById('name').value.trim() : "";
@@ -20,6 +20,25 @@ if (form) {
         if (!name || !email || !password || !age || !genderSelected || !bio) {
             alert("⚠️ Please fill all required fields before submitting!");
             return;
+        }
+
+        const gender = genderSelected.value;
+
+        // 🚀 BACKEND / MONGODB KO DATA BHEJNE KA CODE ADD KIYA:
+        try {
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password, age, gender, bio })
+            });
+            const result = await response.json();
+
+            if (!result.success) {
+                alert("⚠️ Error saving data: " + result.error);
+                return;
+            }
+        } catch (err) {
+            console.error("MongoDB Save Error:", err);
         }
 
         userData.name = name;
