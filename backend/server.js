@@ -4,16 +4,17 @@ const cors = require('cors');
 const path = require('path');
 const connectDB = require('./config/db');
 const aiRoutes = require('./routes/aiRoutes');
-const User = require('./models/User'); // 👈 User Model Import Kar Diya
+const User = require('./models/User');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-// Serve static files (HTML, CSS, JS) from the root directory
+// Serve static files from root directory
 app.use(express.static(path.join(__dirname, '..')));
 
+// Connect Database
 connectDB();
 
 let visitorCount = 100;
@@ -23,7 +24,7 @@ app.get('/api/analytics/visitor-count', (req, res) => {
     res.json({ success: true, totalVisitors: visitorCount });
 });
 
-// 🚀 REGISTER ROUTE (DATA MONGODB MEIN SAVE KARNE KE LIYE)
+// 🚀 REGISTER ROUTE (MongoDB Save)
 app.post('/api/register', async (req, res) => {
     try {
         const { name, email, password, age, gender, bio } = req.body;
@@ -48,8 +49,8 @@ app.post('/api/register', async (req, res) => {
 // AI Routes
 app.use('/api', aiRoutes);
 
-// Serves the main UI (index.html) on root URL
-app.get('/', (req, res) => {
+// Serves the main UI (index.html)
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'index.html'));
 });
 
