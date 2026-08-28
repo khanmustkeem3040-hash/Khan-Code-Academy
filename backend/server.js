@@ -1,9 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const path = require('path'); // Added for serving static files
+const path = require('path');
 const connectDB = require('./config/db');
 const aiRoutes = require('./routes/aiRoutes');
+const User = require('./models/User'); // 👈 User Model Import Kar Diya
 
 const app = express();
 
@@ -22,7 +23,29 @@ app.get('/api/analytics/visitor-count', (req, res) => {
     res.json({ success: true, totalVisitors: visitorCount });
 });
 
-// FIXED: '/api/ai' ko change karke '/api' kar diya taaki script.js se match ho jaye
+// 🚀 REGISTER ROUTE (DATA MONGODB MEIN SAVE KARNE KE LIYE)
+app.post('/api/register', async (req, res) => {
+    try {
+        const { name, email, password, age, gender, bio } = req.body;
+
+        const newUser = new User({
+            name,
+            email,
+            password,
+            age,
+            gender,
+            bio
+        });
+
+        await newUser.save();
+        res.status(201).json({ success: true, message: "User registered successfully!" });
+    } catch (err) {
+        console.error("Registration Error:", err);
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
+
+// AI Routes
 app.use('/api', aiRoutes);
 
 // Serves the main UI (index.html) on root URL

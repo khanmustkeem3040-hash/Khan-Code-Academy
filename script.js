@@ -4,7 +4,7 @@ let userData = {
     selectedFramework: "HTML / CSS / JS"
 };
 
-// Form Handler
+// Form Handler (Fixed & Verified)
 const form = document.querySelector('form');
 if (form) {
     form.addEventListener('submit', async function(event) {
@@ -24,21 +24,26 @@ if (form) {
 
         const gender = genderSelected.value;
 
-        // 🚀 BACKEND / MONGODB KO DATA BHEJNE KA CODE ADD KIYA:
+        // 🚀 DATABASE SAVE WITH VISIBLE ERROR ALERT
         try {
             const response = await fetch('/api/register', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, password, age, gender, bio })
             });
+
             const result = await response.json();
 
-            if (!result.success) {
-                alert("⚠️ Error saving data: " + result.error);
+            if (result.success) {
+                alert("✅ Success! Data saved to MongoDB Cloud.");
+            } else {
+                alert("⚠️ Backend Error: " + (result.error || "Failed to save"));
                 return;
             }
         } catch (err) {
+            alert("⚠️ Network Error: Check backend route or server status!");
             console.error("MongoDB Save Error:", err);
+            return;
         }
 
         userData.name = name;
