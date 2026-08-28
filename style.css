@@ -722,3 +722,36 @@ p code, li code {
     border: none !important;
     width: 100% !important;
 }
+
+
+/* Modern Floating Toast Notification */
+#toast-notification {
+    visibility: hidden;
+    min-width: 280px;
+    background-color: #0f172a;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 14px 20px;
+    position: fixed;
+    z-index: 9999;
+    right: 20px;
+    top: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border-left: 5px solid #22c55e;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    transform: translateY(-20px);
+}
+
+#toast-notification.error {
+    border-left-color: #ef4444;
+}
+
+#toast-notification.toast-show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}

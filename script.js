@@ -4,7 +4,25 @@ let userData = {
     selectedFramework: "HTML / CSS / JS"
 };
 
-// Form Handler (Fixed & Verified)
+// 🟢 MODERN TOAST NOTIFICATION FUNCTION (No Screen Blocking)
+function showToast(message, type = 'success') {
+    let toast = document.getElementById('toast-notification');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast-notification';
+        document.body.appendChild(toast);
+    }
+
+    toast.innerText = message;
+    toast.className = `toast-show ${type}`;
+
+    // 3 seconds ke baad apne aap gayab ho jayega
+    setTimeout(() => {
+        toast.className = toast.className.replace('toast-show', '');
+    }, 3000);
+}
+
+// Form Handler (Fixed & Verified with Modern Toast)
 const form = document.querySelector('form');
 if (form) {
     form.addEventListener('submit', async function(event) {
@@ -18,13 +36,13 @@ if (form) {
         const bio = document.getElementById('bio') ? document.getElementById('bio').value.trim() : "";
 
         if (!name || !email || !password || !age || !genderSelected || !bio) {
-            alert("⚠️ Please fill all required fields before submitting!");
+            showToast("⚠️ Please fill all required fields before submitting!", "error");
             return;
         }
 
         const gender = genderSelected.value;
 
-        // 🚀 DATABASE SAVE WITH VISIBLE ERROR ALERT
+        // 🚀 DATABASE SAVE WITH SILENT TOAST NOTIFICATION
         try {
             const response = await fetch('/api/register', {
                 method: 'POST',
@@ -35,13 +53,13 @@ if (form) {
             const result = await response.json();
 
             if (result.success) {
-                alert("✅ Success! Data saved to MongoDB Cloud.");
+                showToast("🎉 Registration Successful!", "success");
             } else {
-                alert("⚠️ Backend Error: " + (result.error || "Failed to save"));
+                showToast("⚠️ Backend Error: " + (result.error || "Failed to save"), "error");
                 return;
             }
         } catch (err) {
-            alert("⚠️ Network Error: Check backend route or server status!");
+            showToast("⚠️ Network Error: Check backend route or server status!", "error");
             console.error("MongoDB Save Error:", err);
             return;
         }
@@ -148,7 +166,6 @@ function addCopyButtons(container) {
     codeBlocks.forEach((pre) => {
         if (pre.querySelector('.copy-btn')) return;
 
-        // Class add kar rahe hain, design pure style.css se aayega
         pre.classList.add('code-wrapper-box');
         
         const btn = document.createElement('button');
@@ -204,7 +221,6 @@ async function fetchAINotes(language) {
                 </div>
             `;
 
-            // Force auto-wrap & Add Copy Buttons
             const notesContent = document.getElementById('formatted-notes-content');
             applyStrictWrap(notesContent);
             addCopyButtons(notesContent);
@@ -243,7 +259,6 @@ async function fetchAIBasics(category, topic) {
                 <div id="formatted-basics-content" style="max-width: 100%;">${formattedHTML}</div>
             </div>`;
 
-            // Force auto-wrap & Add Copy Buttons
             const basicsContent = document.getElementById('formatted-basics-content');
             applyStrictWrap(basicsContent);
             addCopyButtons(basicsContent);
